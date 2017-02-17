@@ -1,7 +1,23 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title FaceBible
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/ie10-viewport-bug-workaround.css', rel='stylesheet')
+    link(href='/stylesheets/dashboard.css', rel='stylesheet')
+    script(src='/javascripts/ie-emulation-modes-warning.js')
   body
-    block content
+
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      include ./library/pug/header.pug
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          include ./library/pug/sideBar.pug
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+          block content
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/holder.min.js')
+    script(src='/javascripts/ie10-viewport-bug-workaround.js')

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .row
+    h2.sub-header 新增進度
+    form
+      fieldset
+        .form-group
+          label 日期
+          |  
+          input.form-control(type='date', placeholder='選擇日期')
+
+        .form-group
+          label 讀經進度
+          |  
+          select.form-control
+            option Disabled select
+        
+        .form-group
+          label 今日心得
+          |  
+          textarea.form-control(type='text', placeholder='輸入今日心得', rows=10)
+        |  
+        button.btn.btn-primary(type='submit') Submit
