@@ -12,9 +12,8 @@ block content
         .form-inline
           .form-group
             label 讀經進度
-            select.form-control
-              option 創世記
-            select.form-control
+            select#bibleName.form-control
+            select#chapter.form-control
               option 1
               option 2
             label 章
@@ -23,7 +22,7 @@ block content
               option 2
             label 節
             label ~
-            select.form-control
+            select#chapter2.form-control
               option 1
               option 2
             label 章
@@ -36,3 +35,4 @@ block content
           label 今日心得
           textarea.form-control(type='text', placeholder='輸入今日心得', rows=10)
         button.btn.btn-primary Send
+    script(src='/javascripts/insert.js')
