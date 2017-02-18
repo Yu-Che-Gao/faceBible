@@ -1,3 +1,7 @@
+document.getElementById('uploadBtn').addEventListener('change', function () {
+    previewImg();
+})
+
 xhr('POST', '/bible/listall', '', function (response) {
     var json = JSON.parse(response);
     var bibleName = document.getElementById('bibleName');
@@ -91,6 +95,26 @@ function xhr(method, url, data, callback) {
     xhttp.open(method, url, true);
     if (method === 'POST') xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send(data);
+}
+
+function previewImg() {
+    waitingDialog.show('解析中...');
+    var preview = document.getElementById('previewImg');
+    var file = document.getElementById('uploadBtn').files[0];
+    var reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+        preview.src = this.result;
+        xhr('POST', '/google/image2text', 'image=' + encodeURIComponent(this.result.split('base64,')[1].toString()), function (response) {
+            var json = JSON.parse(response);
+            document.getElementById('content').innerHTML = json.responses[0].textAnnotations[0].description;
+            waitingDialog.hide();
+        });
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 }
 
 function listChapter(name, callback) {

@@ -19,4 +19,5 @@ block content
               -var date=new Date(val.date)
               td= date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate()
               td= val.start+'~'+val.end
-              td= val.content
+              - var content=val.content.replace(/\n/g, '<br>')
+              td!= content

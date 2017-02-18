@@ -1,6 +1,21 @@
 extends layout
 
 block content
+
+  .container
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal') &times;
+              h4.modal-title 圖片轉文字
+            .modal-body
+              input#uploadBtn(type='file')
+              br
+              img#previewImg(src='', height='500', alt='Image preview...')
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+
   .row
     h2.sub-header 新增進度
     form
@@ -34,6 +49,7 @@ block content
         
         .form-group
           label 今日心得
+          button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') 圖片轉文字
           textarea#content.form-control(type='text', placeholder='輸入今日心得', rows=10)
     button#sendBtn.btn.btn-primary Send
     script(src='/javascripts/insert.js')

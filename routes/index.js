@@ -2,6 +2,7 @@ const express = require('express')
 const mysql = require('mysql')
 const request = require('request')
 const csv = require('csvtojson')
+const nl2br = require('nl2br')
 const router = express.Router()
 const title = 'FaceBible'
 
@@ -15,7 +16,9 @@ const conn = mysql.createConnection({
 conn.connect()
 
 router.get('/', (req, res) => {
-  conn.query("SELECT * FROM log", (error, results, fields) => res.render('index', { title: title, data: results }))
+  conn.query("SELECT * FROM log", (error, results, fields) => {
+    res.render('index', { title: title, data: results })
+  })
 })
 
 router.get('/insert', (req, res) => {
@@ -28,6 +31,31 @@ router.post('/log/insert', (req, res) => {
       throw error
       res.send('error')
     } else res.send('success')
+  })
+})
+
+router.post('/google/image2text', (req, res) => {
+  let imageData = req.body.image
+  let sendData = {
+    "requests": [
+      {
+        "image": { "content": imageData },
+        "features": [
+          {
+            "type": "TEXT_DETECTION",
+            "maxResults": 1
+          }
+        ]
+      }
+    ]
+  }
+
+  request({
+    method: 'POST',
+    uri: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAqIOd_2UJD_ErCWnhYgbza3REslJTdDN8',
+    json: sendData
+  }, (error, response, body) => {
+    res.send(body)
   })
 })
 
