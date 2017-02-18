@@ -7,18 +7,32 @@ block content
       fieldset
         .form-group
           label 日期
-          |  
           input.form-control(type='date', placeholder='選擇日期')
 
-        .form-group
-          label 讀經進度
-          |  
-          select.form-control
-            option Disabled select
+        .form-inline
+          .form-group
+            label 讀經進度
+            select.form-control
+              option 創世記
+            select.form-control
+              option 1
+              option 2
+            label 章
+            select.form-control
+              option 1
+              option 2
+            label 節
+            label ~
+            select.form-control
+              option 1
+              option 2
+            label 章
+            select.form-control
+              option 1
+              option 2
+            label 節
         
         .form-group
           label 今日心得
-          |  
           textarea.form-control(type='text', placeholder='輸入今日心得', rows=10)
-        |  
-        button.btn.btn-primary(type='submit') Submit
+        button.btn.btn-primary Send
