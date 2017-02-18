@@ -48,8 +48,8 @@ router.post('/bible/listall', (req, res) => {
 })
 
 router.post('/bible/content', (req, res) => {
-  request('https://bible.fhl.net/json/qb.php?chineses=' + encodeURIComponent(req.body.name), (error, response, body) => {
-    if (!error && response.statusCode === 200) res.json(body)
+  request('https://bible.fhl.net/json/qb.php?chineses=' + encodeURIComponent(req.body.name) + '&chap=' + req.body.chap, (error, response, body) => {
+    if (!error && response.statusCode === 200) res.send(body)
   })
 })
 

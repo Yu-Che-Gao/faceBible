@@ -14,21 +14,22 @@ block content
             label 讀經進度
             select#bibleName.form-control
             select#chapter.form-control
-              option 1
-              option 2
+              - for(var i=0; i<50; i++) 
+                option= i+1
             label 章
-            select.form-control
-              option 1
-              option 2
+            select#section.form-control
+              - for(var i=0; i<31; i++) 
+                option= i+1
             label 節
             label ~
+            select#bibleName2.form-control
             select#chapter2.form-control
-              option 1
-              option 2
+              - for(var i=0; i<50; i++) 
+                option= i+1
             label 章
-            select.form-control
-              option 1
-              option 2
+            select#section2.form-control
+              - for(var i=0; i<31; i++) 
+                option= i+1
             label 節
         
         .form-group
