@@ -13,8 +13,10 @@ block content
             th 今日心得
             
         tbody
-          tr
-            td 1
-            td Lorem
-            td elit
-            td 1/9
+          each val in data
+            tr
+              td= val.id
+              -var date=new Date(val.date)
+              td= date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate()
+              td= val.start+'~'+val.end
+              td= val.content

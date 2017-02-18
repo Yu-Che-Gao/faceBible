@@ -13,7 +13,11 @@ const conn = mysql.createConnection({
 conn.connect()
 
 router.get('/', (req, res) => {
-  res.render('index', { title: title })
+  conn.query("SELECT * FROM log", (error, results, fields) => {
+    console.log(results[0].id)
+    res.render('index', { title: title, data: results })
+
+  })
 })
 
 router.get('/insert', (req, res) => {
