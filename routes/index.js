@@ -5,18 +5,11 @@ const csv = require('csvtojson')
 const router = express.Router()
 const title = 'FaceBible'
 
-// const conn = mysql.createConnection({
-//   host: 'us-cdbr-azure-southcentral-f.cloudapp.net',
-//   user: 'be0939441f5394',
-//   password: '1e3334e2',
-//   database: 'facebiblesql'
-// })
-
 const conn = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'facebible'
+  host: 'us-cdbr-azure-southcentral-f.cloudapp.net',
+  user: 'be0939441f5394',
+  password: '1e3334e2',
+  database: 'facebiblesql'
 })
 
 conn.connect()
