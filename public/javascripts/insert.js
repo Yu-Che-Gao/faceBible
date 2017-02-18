@@ -62,6 +62,24 @@ document.getElementById('chapter2').addEventListener('change', function () {
 
 })
 
+document.getElementById('sendBtn').addEventListener('click', function () {
+    waitingDialog.show('waiting');
+    var start = document.getElementById('bibleName').value + document.getElementById('chapter').value + '章' + document.getElementById('section').value + '節';
+    var end = document.getElementById('bibleName2').value + document.getElementById('chapter2').value + '章' + document.getElementById('section2').value + '節';
+    var content = document.getElementById('content').value;
+    var date = document.getElementById('myDate').value;
+    xhr('POST', '/log/insert', 'start=' + start + '&end=' + end + '&content=' + content + '&date=' + date, function (response) {
+        if (response === 'success') {
+            clearUI();
+            waitingDialog.hide();
+        }
+        else {
+            alert('傳輸失敗!');
+            waitingDialog.hide();
+        }
+    })
+})
+
 function xhr(method, url, data, callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -93,4 +111,9 @@ function listNum(integer) {
     var data = [];
     for (var i = 0; i < integer; i++) data.push(i + 1);
     return data;
+}
+
+function clearUI() {
+    document.getElementById('myDate').value = '';
+    document.getElementById('content').value = '';
 }

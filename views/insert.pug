@@ -7,7 +7,7 @@ block content
       fieldset
         .form-group
           label 日期
-          input.form-control(type='date', placeholder='選擇日期')
+          input#myDate.form-control(type='date', placeholder='選擇日期')
 
         .form-inline
           .form-group
@@ -34,6 +34,6 @@ block content
         
         .form-group
           label 今日心得
-          textarea.form-control(type='text', placeholder='輸入今日心得', rows=10)
-        button.btn.btn-primary Send
+          textarea#content.form-control(type='text', placeholder='輸入今日心得', rows=10)
+    button#sendBtn.btn.btn-primary Send
     script(src='/javascripts/insert.js')
