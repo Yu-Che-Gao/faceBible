@@ -64,8 +64,10 @@ document.getElementById('chapter2').addEventListener('change', function () {
 
 document.getElementById('sendBtn').addEventListener('click', function () {
     waitingDialog.show('waiting');
-    var start = document.getElementById('bibleName').value + document.getElementById('chapter').value + '章' + document.getElementById('section').value + '節';
-    var end = document.getElementById('bibleName2').value + document.getElementById('chapter2').value + '章' + document.getElementById('section2').value + '節';
+    var bibleName = document.getElementById('bibleName');
+    var bibleName2 = document.getElementById('bibleName2');
+    var start = bibleName.options[bibleName.selectedIndex].innerHTML + document.getElementById('chapter').value + '章' + document.getElementById('section').value + '節';
+    var end = bibleName2.options[bibleName2.selectedIndex].innerHTML + document.getElementById('chapter2').value + '章' + document.getElementById('section2').value + '節';
     var content = document.getElementById('content').value;
     var date = document.getElementById('myDate').value;
     xhr('POST', '/log/insert', 'start=' + start + '&end=' + end + '&content=' + content + '&date=' + date, function (response) {
