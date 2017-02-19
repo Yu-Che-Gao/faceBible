@@ -7,17 +7,18 @@ block content
       table.table.table-striped
         thead
           tr
-            th #
             th 日期
             th 讀經進度
             th 今日心得
+            th 刪除
             
         tbody
           each val in data
             tr
-              td= val.id
               -var date=new Date(val.date)
               td= date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate()
               td= val.start+'~'+val.end
               - var content=val.content.replace(/\n/g, '<br>')
               td!= content
+              td 
+                button.btn.btn-danger(type='button') Delete
