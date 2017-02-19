@@ -1,24 +1,25 @@
 const express = require('express')
-const mysql = require('mysql')
 const request = require('request')
 const csv = require('csvtojson')
 const nl2br = require('nl2br')
+const mongoose = require('mongoose')
 const router = express.Router()
 const title = 'FaceBible'
+const conn = mongoose.connect(process.env.MONGODB_URI)
 
-const conn = mysql.createConnection({
-  host: 'us-cdbr-azure-southcentral-f.cloudapp.net',
-  user: 'be0939441f5394',
-  password: '1e3334e2',
-  database: 'facebiblesql'
-})
-
-conn.connect()
+let logSchema = new mongoose.Schema(
+  {
+    start: { type: String },
+    end: { type: String },
+    content: { type: String },
+    date: { type: Date },
+    user: { type: String }
+  }
+)
 
 router.get('/', (req, res) => {
-  conn.query("SELECT * FROM log", (error, results, fields) => {
-    res.render('index', { title: title, data: results })
-  })
+  let log = mongoose.model('log', logSchema)
+  log.find({}, (err, logs) => res.render('index', { title: title, data: logs }))
 })
 
 router.get('/insert', (req, res) => {
@@ -26,26 +27,31 @@ router.get('/insert', (req, res) => {
 })
 
 router.post('/log/insert', (req, res) => {
-  conn.query("INSERT INTO log(`start`, `end`, `content`, `date`) VALUES ('" + req.body.start + "', '" + req.body.end + "', '" + req.body.content + "', '" + req.body.date + "')", (error, results, fields) => {
-    if (error) {
-      throw error
+  let log = mongoose.model('log', logSchema)
+  let instance = new log({
+    start: req.body.start,
+    end: req.body.end,
+    content: req.body.content,
+    date: req.body.date,
+    user: req.body.user
+  })
+
+  instance.save((err, doc) => {
+    if (err) {
       res.send('error')
-    } else res.send('success')
+      console.log(err)
+    }
+    else res.send('success')
   })
 })
 
 router.post('/google/image2text', (req, res) => {
-  let imageData = req.body.image
   let sendData = {
-    "requests": [
+    "requests":
+    [
       {
-        "image": { "content": imageData },
-        "features": [
-          {
-            "type": "TEXT_DETECTION",
-            "maxResults": 1
-          }
-        ]
+        "image": { "content": req.body.image },
+        "features": [{ "type": "TEXT_DETECTION", "maxResults": 1 }]
       }
     ]
   }
