@@ -2,7 +2,7 @@ extends layout
 
 block content
   .row
-    h2.sub-header Overview
+    h2.sub-header 讀經進度
     .table-responsive
       table.table.table-striped
         thead
@@ -15,7 +15,7 @@ block content
         tbody
           each val in data
             tr
-              -var date=new Date(val.date)
+              - var date=new Date(val.date)
               td= date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate()
               td= val.start+'~'+val.end
               - var content=val.content.replace(/\n/g, '<br>')

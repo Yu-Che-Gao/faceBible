@@ -5,8 +5,7 @@ const nl2br = require('nl2br')
 const mongoose = require('mongoose')
 const router = express.Router()
 const title = 'FaceBible'
-// const conn = mongoose.connect(process.env.MONGODB_URI)
-const conn = mongoose.connect('mongodb://heroku_bp1rnb3n:rld7ofa2q94n3dg41ojm0n9aq6@ds153815.mlab.com:53815/heroku_bp1rnb3n')
+const conn = mongoose.connect(process.env.MONGODB_URI)
 
 let logSchema = new mongoose.Schema(
   {

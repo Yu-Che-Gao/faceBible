@@ -2,23 +2,39 @@ doctype html
 html
   head
     title FaceBible
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='author', content='高宇哲')
     link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
-    link(href='/stylesheets/ie10-viewport-bug-workaround.css', rel='stylesheet')
-    link(href='/stylesheets/dashboard.css', rel='stylesheet')
-    script(src='/javascripts/ie-emulation-modes-warning.js')
+    link(href='/stylesheets/metisMenu.min.css', rel='stylesheet')
+    link(href='/stylesheets/sb-admin-2.css', rel='stylesheet')
+    link(href='/stylesheets/font-awesome.min.css', rel='stylesheet', type='text/css')
     
   body
-    nav.navbar.navbar-inverse.navbar-fixed-top
-      include ./library/pug/header.pug
-    .container-fluid
-      .row
-        .col-sm-3.col-md-2.sidebar
-          include ./library/pug/sideBar.pug
-        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-          block content
 
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    #wrapper
+      nav.navbar.navbar-default.navbar-static-top(role='navigation', style='margin-bottom: 0')
+        include ./library/pug/header.pug
+        .navbar-default.sidebar(role='navigation')
+          .sidebar-nav.navbar-collapse
+            include ./library/pug/sideBar.pug
+
+      #page-wrapper
+        block content
+    //- nav.navbar.navbar-inverse.navbar-fixed-top
+    //-   include ./library/pug/header.pug
+    //- .container-fluid
+    //-   .row
+    //-     .col-sm-3.col-md-2.sidebar
+    //-       include ./library/pug/sideBar.pug
+    //-     .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+    //-       block content
+
+    script(src='/javascripts/jquery.min.js')
     script(src='/javascripts/bootstrap.min.js')
     script(src='/javascripts/holder.min.js')
     script(src='/javascripts/ie10-viewport-bug-workaround.js')
     script(src='/javascripts/bootstrap-waitingfor.min.js')
+    script(src='/javascripts/metisMenu.min.js')
+    script(src='/javascripts/sb-admin-2.js')
